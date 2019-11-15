@@ -1,0 +1,42 @@
+<div>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span>Licence Plate Recognition with Kafka Integration</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <button mat-button color="accent" (click)="sidenav.toggle()">Open Sidenav</button>
+      <span> {{title}} </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side">
+    <ul>
+      <li>
+        <a mat-raised-button color="accent" routerLink="../tabledisp">Go To Table Display</a>
+      </li>
+      <li>
+        <a mat-raised-button color="accent" routerLink="../licplatinfo/1">Go To Licence Plate Info</a>
+      </li>
+      <li>
+        <a mat-raised-button color="primary" routerLink="../infostream">Go To Live Information Stream</a>
+      </li>
+      <li>
+        <a mat-raised-button color="accent" routerLink="../trainlicplat">Go To Licence Plate Trainer</a>
+      </li>
+    </ul>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-action-list>
+      <h3 matHeader>Licence Plates</h3>
+      <!-- <button class="style" mat-list-item *ngFor="let employee of employees" (click)="test()">
+        <h4 mat-line><b>employee.name</b> </h4>
+        <p mat-line>Was last seen at employee.cameraID on employee.timestamp | date: 'medium' </p>
+      </button> -->
+    </mat-action-list>
+    <hr>
+    <h3>Total updates: totalUpdates </h3>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
