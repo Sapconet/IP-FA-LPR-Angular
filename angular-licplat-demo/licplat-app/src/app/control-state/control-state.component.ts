@@ -23,18 +23,22 @@ export class ControlStateComponent implements OnInit {
   }
 
   start() {
+    console.log('Start button clicked');
     this.dataService.startPlateGrab();
   }
 
   stop() {
+    console.log('Stop button clicked');
     this.dataService.stopPlateGrab();
   }
 
   resume() {
+    console.log('Resume button clicked');
     this.dataService.resumePlateGrab();
   }
 
   suspend() {
+    console.log('Suspend button clicked');
     this.dataService.suspendPlateGrab();
   }
 }
