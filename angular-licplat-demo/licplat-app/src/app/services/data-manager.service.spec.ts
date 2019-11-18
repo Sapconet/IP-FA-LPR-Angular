@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LicplatService } from './licplat.service';
+import { DataManagerService } from './data-manager.service';
 
-describe('LicplatService', () => {
+describe('DataManagerService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: LicplatService = TestBed.get(LicplatService);
+    const service: DataManagerService = TestBed.get(DataManagerService);
     expect(service).toBeTruthy();
   });
 });

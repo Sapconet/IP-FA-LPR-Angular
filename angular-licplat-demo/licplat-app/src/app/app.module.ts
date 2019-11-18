@@ -16,7 +16,9 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { GraphQLModule } from './graphql.module';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -25,6 +27,7 @@ import { TableDispComponent } from "./table-disp/table-disp.component";
 import { InfoStreamComponent } from "./info-stream/info-stream.component";
 import { LicplatInfoComponent } from "./licplat-info/licplat-info.component";
 import { LicplatTrainPublishComponent } from './licplat-train-publish/licplat-train-publish.component';
+import { ControlStateComponent } from './control-state/control-state.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { LicplatTrainPublishComponent } from './licplat-train-publish/licplat-tr
     TableDispComponent,
     InfoStreamComponent,
     LicplatInfoComponent,
-    LicplatTrainPublishComponent
+    LicplatTrainPublishComponent,
+    ControlStateComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,10 @@ import { LicplatTrainPublishComponent } from './licplat-train-publish/licplat-tr
     MatMenuModule,
     MatIconModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,8 +15,8 @@ import { FormControl } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 // import { SomeService, LicencePlate } from "./data.service";
 
-import { LicencePlate } from "../licplat";
-import { LICPLAT_DATA } from "../mock-licplats";
+import { LicencePlate } from "../models/licplat";
+import { LICPLAT_DATA } from "../models/mock-licplats";
 // import { LicplatService } from "../licplat.service";
 
 @Component({

@@ -2,9 +2,9 @@ import { Component, OnInit, Input } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
-import { LicencePlate } from "../licplat";
+import { LicencePlate } from "../models/licplat";
 // import { LICPLAT_DATA } from "../mock-licplats";
-import { LicPlatService } from "../licplat.service";
+import { LicPlatService } from "../services/licplat.service";
 
 @Component({
   selector: "app-licplat-info",
