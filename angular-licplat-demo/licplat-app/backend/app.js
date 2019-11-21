@@ -1,7 +1,7 @@
 const express = require("express"),
   cors = require("cors");
 // const bodyParser = require("body-parser");
-// const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
+// const { graphqlExpress, graphiqlExpress } = require("apollo-server");
 // const { makeExecutableSchema } = require("graphql-tools");
 const typeDefs = require("./gql/schema");
 const resolvers = require("./gql/resolvers");
@@ -18,7 +18,10 @@ const schema = new ApolloServer({
   typeDefs,
   resolvers,
   playground: {
-    endpoint: "graphql"
+    endpoint: "/graphql",
+    settings: {
+      "editor.theme": "light"
+    }
   }
 });
 
@@ -38,12 +41,12 @@ var corsOptions = {
 // app.use("*", cors(corsOptions));
 
 // The GraphQL endpoint
-//app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
+// app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
 
 // GraphiQL, a visual editor for queries
-//app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
+// app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 
-// const server = createServer(app);
+const server = createServer(app);
 
 // Start the server
 /*app.listen(3000, () => {
@@ -52,7 +55,10 @@ var corsOptions = {
 
 schema.applyMiddleware({ app }, cors(corsOptions));
 
-app.listen(PORT, () => {
+app.listen(PORT, err => {
+  if (err) {
+    throw new Error(err);
+  }
   new SubscriptionServer(
     {
       execute,
@@ -60,7 +66,7 @@ app.listen(PORT, () => {
       schema
     },
     {
-      server: app,
+      server,
       path: "/graphql"
     }
   );
