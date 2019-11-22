@@ -10,6 +10,8 @@ import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 const cache = new InMemoryCache();
 
@@ -122,6 +124,23 @@ export class DataManagerService {
     }).catch(
       err => console.log(err)
     );
+
+    // const HttpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+
+    // this.http.post('https://012169b1.ngrok.io/send-img', 'startPlateGrab', HttpOptions).subscribe(
+    //   val => {
+    //     console.log("post call successful value returned in body", val);
+    //     this.presentToast("Well, hello sailor!");
+    //   },
+    //   response => {
+    //     console.log("post call in error", response);
+    //     this.presentToast(JSON.stringify(response.error.text));
+
+    //   },
+    //   () => {
+    //     console.log("The post observable is now completed.");
+    //   }
+    // );
   }
 
   stopPlateGrab() {
