@@ -1,63 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { ImageService } from "../services/image-service.service";
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) { }
-}
+import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-licplat-train-publish',
   templateUrl: './licplat-train-publish.component.html',
   styleUrls: ['./licplat-train-publish.component.css']
 })
-export class LicplatTrainPublishComponent {
+export class LicplatTrainPublishComponent implements OnInit {
   title = "Licence Plate Training Page";
 
-  selectedFile: ImageSnippet;
+  fileData: File = null;
+  previewUrl: any = null;
+  fileUploadProgress: string = null;
+  uploadedFilePath: string = null;
 
-  constructor(private imageService: ImageService) { }
+  constructor(private http: HttpClient) { }
 
-  onFileSelected(fileInput: any) {
-    // const inputNode: any = document.querySelector('#file');
-    const file: File = fileInput.files[0];
+  ngOnInit() { }
 
-    if (typeof (FileReader) !== 'undefined') {
-      const reader = new FileReader();
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    this.preview();
+  }
 
-      reader.onload = (e: any) => {
-        this.selectedFile = e.target.result;
-      };
+  preview() {
+    // Show preview
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
 
-      /* this.imageService.uploadImage(this.selectedFile.file).subscribe(
-        (res) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(this.fileData);
+    reader.onload = (_event) => {
+      this.previewUrl = reader.result;
 
-        },
-        (err) => {
-
-        })*/
-
-      // reader.readAsArrayBuffer(inputNode.files[0]);
-      reader.readAsDataURL(file);
     }
   }
 
-  /* processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
+  onSubmit() {
+    const formData = new FormData();
+    formData.append('files', this.fileData);
 
-    reader.addEventListener('load', (event: any) => {
+    this.fileUploadProgress = '0%';
 
-      this.selectedFile = new ImageSnippet(event.target.result, file);
+    this.http.post('http://localhost:5000/file-upload', formData, {
+      reportProgress: true,
+      observe: 'events'
+    })
+      .subscribe(events => {
+        if (events.type === HttpEventType.UploadProgress) {
+          this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+          console.log(this.fileUploadProgress);
+        } else if (events.type === HttpEventType.Response) {
+          this.fileUploadProgress = '';
+          console.log(events.body);
+          alert('SUCCESS !!');
+        }
 
-      this.imageService.uploadImage(this.selectedFile.file).subscribe(
-        (res) => {
-
-        },
-        (err) => {
-
-        })
-    });
-
-    reader.readAsDataURL(file);
-  }*/
+      })
+  }
 }

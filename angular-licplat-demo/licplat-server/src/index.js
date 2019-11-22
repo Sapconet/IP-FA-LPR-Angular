@@ -185,6 +185,10 @@ app.post("/suspendFramePlateGrab", (req, res) => {
   });
 });
 
+app.post("/file-upload", function(){
+console.log("File Upload API Activated!!");
+});
+
 app.post("/errors", (req, res) => {
   console.log(req.body);
   res.send();

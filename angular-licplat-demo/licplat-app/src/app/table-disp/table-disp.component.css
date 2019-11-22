@@ -88,3 +88,7 @@ th.mat-sort-header-sorted {
 .mat-sidenav {
   width: 20%;
 }
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}

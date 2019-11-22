@@ -1,11 +1,13 @@
 <div>
-  <mat-toolbar>
+  <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span>Licence Plate Recognition with Kafka Integration</span>
     </mat-toolbar-row>
     <mat-toolbar-row>
       <button mat-button color="accent" (click)="sidenav.toggle()">Open Sidenav</button>
       <span> {{title}} </span>
+      <span class="toolbar-spacer"></span>
+      <img src="/assets/sapconet-logo_03.png" alt="" width="150px" />
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
@@ -31,7 +33,26 @@
     </ul>
   </mat-sidenav>
   <mat-sidenav-content>
-    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-    <input hidden (change)="onFileSelected()" #fileInput type="file" id="file" accept="image/*">
+    <!-- <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" accept="image/*">
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button> -->
+    <h3>Choose Image to Upload</h3>
+    <div class="form-group">
+      <input #fileInput hidden type="file" name="image" (change)="fileProgress($event)" accept="image/*" />
+      <button type="button" mat-raised-button (click)="fileInput.click()">Choose</button>
+    </div>
+    <div *ngIf="fileUploadProgress">
+      Upload progress: {{ fileUploadProgress }}
+    </div>
+    <div class="image-preview mb-3" *ngIf="previewUrl">
+      <img [src]="previewUrl" height="300" />
+    </div>
+
+    <div class="mb-3" *ngIf="uploadedFilePath">
+      {{uploadedFilePath}}
+    </div>
+
+    <div class="form-group">
+      <button type="button" mat-stroked-button (click)="onSubmit()">Submit</button>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

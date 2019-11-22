@@ -83,22 +83,6 @@ export class TableDispComponent implements OnInit {
     // this.groupByColumns = ["last_seen_date"];
   }
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000
-    });
-  }
-
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -119,8 +103,29 @@ export class TableDispComponent implements OnInit {
     ); */
   }
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
+  }
+
   onSelect(licplat: LicencePlate): void {
     this.selectedLicPlat = licplat;
+  }
+
+  refreshData() {
+    this.openSnackBar('Data is now refreshing', 'OK');
+    window.location.reload();
   }
 
   /* getLicPlats(): void {
