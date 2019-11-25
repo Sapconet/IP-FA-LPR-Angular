@@ -22,7 +22,7 @@ export class LicplatInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private licPlatService: LicPlatService,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getLicPlats();

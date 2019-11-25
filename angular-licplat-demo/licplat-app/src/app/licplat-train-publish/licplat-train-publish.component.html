@@ -30,6 +30,9 @@
       <li>
         <a mat-raised-button color="accent" routerLink="../control">Go To Controller</a>
       </li>
+      <li>
+        <a mat-raised-button color="accent" routerLink="/dashboard">Go To Dashboard</a>
+      </li>
     </ul>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -38,7 +41,7 @@
     <h3>Choose Image to Upload</h3>
     <div class="form-group">
       <input #fileInput hidden type="file" name="image" (change)="fileProgress($event)" accept="image/*" />
-      <button type="button" mat-raised-button (click)="fileInput.click()">Choose</button>
+      <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Choose</button>
     </div>
     <div *ngIf="fileUploadProgress">
       Upload progress: {{ fileUploadProgress }}
@@ -52,7 +55,9 @@
     </div>
 
     <div class="form-group">
-      <button type="button" mat-stroked-button (click)="onSubmit()">Submit</button>
+      <button type="button" mat-stroked-button disabled *ngIf="hideDisabled">Submit</button>
+      <button type="button" mat-flat-button color="accent" (click)="onSubmit()" *ngIf="hideSubmitCancel">Submit</button>
+      <button type="button" mat-flat-button color="warn" (click)="Cancel()" *ngIf="hideSubmitCancel">Cancel</button>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -16,6 +16,10 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
@@ -28,6 +32,7 @@ import { InfoStreamComponent } from "./info-stream/info-stream.component";
 import { LicplatInfoComponent } from "./licplat-info/licplat-info.component";
 import { LicplatTrainPublishComponent } from './licplat-train-publish/licplat-train-publish.component';
 import { ControlStateComponent } from './control-state/control-state.component';
+import { LicplatDashboardComponent } from './licplat-dashboard/licplat-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +41,8 @@ import { ControlStateComponent } from './control-state/control-state.component';
     InfoStreamComponent,
     LicplatInfoComponent,
     LicplatTrainPublishComponent,
-    ControlStateComponent
+    ControlStateComponent,
+    LicplatDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +66,12 @@ import { ControlStateComponent } from './control-state/control-state.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    GraphQLModule
+    GraphQLModule,
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

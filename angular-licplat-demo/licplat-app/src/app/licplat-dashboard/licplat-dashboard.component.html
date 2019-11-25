@@ -1,0 +1,124 @@
+<div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Licence Plate Recognition with Kafka Integration</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <button mat-button color="accent" (click)="sidenav.toggle()">Open Sidenav</button>
+      <span> {{title}} </span>
+      <span class="toolbar-spacer"></span>
+      <img src="/assets/sapconet-logo_03.png" alt="" width="150px" />
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side">
+    <ul>
+      <li>
+        <a mat-raised-button color="accent" routerLink="/tabledisp">Go To Table Display</a>
+      </li>
+      <li>
+        <a mat-raised-button color="accent" routerLink="/licplatinfo/1">Go To Licence Plate Info</a>
+      </li>
+      <li>
+        <a mat-raised-button color="accent" routerLink="../infostream">Go To Live Information Stream</a>
+      </li>
+      <li>
+        <a mat-raised-button color="accent" routerLink="../trainlicplat">Go To Licence Plate Trainer</a>
+      </li>
+      <li>
+        <a mat-raised-button color="accent" routerLink="../control">Go To Controller</a>
+      </li>
+      <li>
+        <a mat-raised-button color="primary" routerLink="/dashboard">Go to Dashboard</a>
+    </ul>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div>
+      <p>
+        A dashboard for live and historical reference.
+      </p>
+    </div>
+
+    <!-- <div>
+      <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile colspan="1" rowspan="1">
+          <div style="display: block; text-align:left; ">
+            <h2>Live</h2>
+            <p>Number of Vehicles:</p>
+            <p>Last Vehicle Recorded:</p>
+            <p>Anomalous Events:</p>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <div style="display: block; text-align:left; ">
+            <h2>History</h2>
+            <p>Date Range:</p>
+            <p>
+              <mat-form-field class="datepicker">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" placeholder="Choose a date"
+                  [formControl]="date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 startView="year" [startAt]="minDate"></mat-datepicker>
+              </mat-form-field>
+              To
+              <mat-form-field class="datepicker">
+                <input matInput [min]="date.value" [max]="maxDate" [matDatepicker]="picker2"
+                  placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </p>
+            <p>Number of Vehicles:</p>
+            <p>Anomalous Events:</p>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          Text
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          Text
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div> -->
+
+    <div>
+      <div class="col">
+        <h2>Live</h2>
+        <p>Number of Vehicles:</p>
+        <p>Last Vehicle Recorded:</p>
+        <p>Anomalous Events:</p>
+      </div>
+      <div class="col">
+        <h2>History</h2>
+        <p>Date Range:</p>
+        <p>
+          <mat-form-field class="datepicker">
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" placeholder="Choose a start date"
+              [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1 startView="year" [startAt]="minDate"></mat-datepicker>
+          </mat-form-field>
+          To
+          <mat-form-field class="datepicker">
+            <input matInput [min]="date.value" [max]="maxDate" [matDatepicker]="picker2"
+              placeholder="Choose an end date">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </p>
+        <p>Number of Vehicles:</p>
+        <p>Anomalous Events:</p>
+      </div>
+    </div>
+    <div>
+      <div class="col">
+        <img src="/assets/ChartImg.png" alt="" />
+      </div>
+      <div class="col">
+        <img src="/assets/ChartImg.png" alt="" />
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

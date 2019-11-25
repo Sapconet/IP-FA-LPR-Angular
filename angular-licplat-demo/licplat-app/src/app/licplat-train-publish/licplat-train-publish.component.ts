@@ -14,6 +14,9 @@ export class LicplatTrainPublishComponent implements OnInit {
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
 
+  hideSubmitCancel: boolean = false;
+  hideDisabled: boolean = true;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() { }
@@ -24,6 +27,8 @@ export class LicplatTrainPublishComponent implements OnInit {
   }
 
   preview() {
+    this.hideDisabled = true;
+    this.hideSubmitCancel = false;
     // Show preview
     var mimeType = this.fileData.type;
     if (mimeType.match(/image\/*/) == null) {
@@ -36,6 +41,9 @@ export class LicplatTrainPublishComponent implements OnInit {
       this.previewUrl = reader.result;
 
     }
+
+    this.hideDisabled = false;
+    this.hideSubmitCancel = true;
   }
 
   onSubmit() {
@@ -59,5 +67,9 @@ export class LicplatTrainPublishComponent implements OnInit {
         }
 
       })
+  }
+
+  Cancel() {
+    window.location.reload();
   }
 }

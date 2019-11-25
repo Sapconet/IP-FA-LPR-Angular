@@ -5,13 +5,15 @@ import { InfoStreamComponent } from "./info-stream/info-stream.component";
 import { LicplatInfoComponent } from "./licplat-info/licplat-info.component";
 import { LicplatTrainPublishComponent } from './licplat-train-publish/licplat-train-publish.component';
 import { ControlStateComponent } from './control-state/control-state.component'
+import { LicplatDashboardComponent } from './licplat-dashboard/licplat-dashboard.component';
 const routes: Routes = [
   { path: "", redirectTo: "tabledisp", pathMatch: "full" },
   { path: "tabledisp", component: TableDispComponent },
   { path: "infostream", component: InfoStreamComponent },
   { path: "licplatinfo/:id", component: LicplatInfoComponent },
   { path: "trainlicplat", component: LicplatTrainPublishComponent },
-  { path: "control", component: ControlStateComponent }
+  { path: "control", component: ControlStateComponent },
+  { path: "dashboard", component: LicplatDashboardComponent }
 ];
 
 @NgModule({

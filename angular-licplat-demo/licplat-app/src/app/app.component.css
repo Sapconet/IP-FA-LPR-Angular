@@ -104,3 +104,7 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+.mat-toolbar-row img {
+  margin: 15px;
+}
