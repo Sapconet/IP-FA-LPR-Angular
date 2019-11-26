@@ -5,14 +5,16 @@ var logger = require("morgan");
 var methodOverride = require("method-override");
 var cors = require("cors");
 
+const config = require("./config");
 const app = express();
-const port = 5000;
+const port = config.PORT;
+
 app.use(bodyParser.json());
 app.use(logger("dev"));
 app.use(methodOverride());
 app.use(cors());
 
-const client = new kafka.KafkaClient({ kafkaHost: "18.209.92.224:9092" });
+const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
 
 app.post("/", (req, res) => {
   console.log("Request body :" + JSON.stringify(req.body));
@@ -185,8 +187,8 @@ app.post("/suspendFramePlateGrab", (req, res) => {
   });
 });
 
-app.post("/file-upload", function(){
-console.log("File Upload API Activated!!");
+app.post("/file-upload", function() {
+  console.log("File Upload API Activated!!");
 });
 
 app.post("/errors", (req, res) => {
@@ -194,6 +196,6 @@ app.post("/errors", (req, res) => {
   res.send();
 });
 
-app.listen(port, () => {
-  console.log("Server is running on port 5000");
+app.listen(500, () => {
+  console.log("Server is running on port " + port);
 });
