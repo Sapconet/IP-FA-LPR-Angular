@@ -7,7 +7,6 @@ var cors = require("cors");
 
 const config = require("./config");
 const app = express();
-const port = config.PORT;
 
 app.use(bodyParser.json());
 app.use(logger("dev"));
@@ -196,6 +195,11 @@ app.post("/errors", (req, res) => {
   res.send();
 });
 
-app.listen(500, () => {
-  console.log("Server is running on port " + port);
-});
+try {
+  const port = config.PORT;
+  app.listen(port, () => {
+    console.log("Server is running on port " + port);
+  });
+} catch (err) {
+  console.error(err);
+}

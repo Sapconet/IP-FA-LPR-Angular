@@ -10,8 +10,9 @@ const { execute, subscribe } = require("graphql");
 const { SubscriptionServer } = require("subscriptions-transport-ws");
 const { getLastImg, getLabelTopic } = require("./kafka");
 const { ApolloServer, gql } = require("apollo-server-express");
+const config = require("./config");
 
-const PORT = 3000;
+const PORT = config.PORT;
 
 // Put together a schema
 const schema = new ApolloServer({
@@ -70,7 +71,7 @@ app.listen(PORT, err => {
       path: "/graphql"
     }
   );
-  console.log("Go to http://localhost:3000/graphql to run queries!");
+  console.log("Go to http://localhost:" + PORT + "/graphql to run queries!");
 });
 
 //getLabelTopic();

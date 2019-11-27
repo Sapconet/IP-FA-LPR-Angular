@@ -1,6 +1,7 @@
 const kafka = require("kafka-node");
 const pubsub = require("./gql/pubsub");
-const client = new kafka.KafkaClient({ kafkaHost: "18.209.92.224:9092" });
+const config = require("./config");
+const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
 
 const LICENCEPLATE_TOPIC = "licenceplate_topic";
 const STATE_TOPIC = "state_topic";
