@@ -14,6 +14,7 @@ import { MatSort } from "@angular/material/sort";
 import { FormControl } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 // import { SomeService, LicencePlate } from "./data.service";
+import { AppService } from '../services/app.service';
 
 import { LicencePlate } from "../models/licplat";
 import { LICPLAT_DATA } from "../models/mock-licplats";
@@ -45,8 +46,6 @@ import { LICPLAT_DATA } from "../models/mock-licplats";
   }
 } */
 export class TableDispComponent implements OnInit {
-  title = "Table Display";
-
   // licplats: LicencePlate[];
   selectedLicPlat: LicencePlate;
 
@@ -77,15 +76,17 @@ export class TableDispComponent implements OnInit {
   groupByColumns: string[] = [];*/
 
   constructor(
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar, private appService: AppService,
     // private licplatService: LicplatService
   ) {
     // this.groupByColumns = ["last_seen_date"];
   }
 
   ngOnInit() {
+    this.appService.setTitle('Table Display');
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
     // this.getLicPlats();
 
     /* this.dataSourceService.getAllData()

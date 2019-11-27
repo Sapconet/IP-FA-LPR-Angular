@@ -1,8 +1,53 @@
 <body class="mat-app-background">
   <div class="content" role="main">
     <main>
-      <router-outlet></router-outlet>
-    </main>
+      <div>
+        <mat-toolbar color="primary">
+          <mat-toolbar-row>
+            <span>Licence Plate Recognition with Kafka Integration</span>
+          </mat-toolbar-row>
+          <mat-toolbar-row>
+            <button mat-button color="accent" (click)="sidenav.toggle()">Open Sidenav</button>
+            <span> {{title}} </span>
+            <span class="toolbar-spacer"></span>
+            <img src="/assets/sapconet-logo_03.png" alt="" width="150px" style="margin-bottom: 15px;" />
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
 
+      <mat-sidenav-container class="example-container">
+        <mat-sidenav #sidenav mode="side">
+          <ul>
+            <li>
+              <a mat-raised-button color="accent" routerLink="../tabledisp">Table Display</a>
+            </li>
+            <li>
+              <a mat-raised-button color="accent" routerLink="../licplatinfo/1">Licence Plate Info</a>
+            </li>
+            <li>
+              <a mat-raised-button color="accent" routerLink="../infostream">Live Information Stream</a>
+            </li>
+            <li>
+              <a mat-raised-button color="accent" routerLink="../trainlicplat">Licence Plate Trainer</a>
+            </li>
+            <li>
+              <a mat-raised-button color="accent" routerLink="../control">Controller</a>
+            </li>
+            <li>
+              <a mat-raised-button color="accent" routerLink="../dashboard">Dashboard</a>
+            </li>
+            <li>
+              <a mat-raised-button color="accent" routerLink="../about">About App</a>
+            </li>
+          </ul>
+        </mat-sidenav>
+        <mat-sidenav-content>
+
+          <router-outlet></router-outlet>
+
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+
+    </main>
   </div>
 </body>

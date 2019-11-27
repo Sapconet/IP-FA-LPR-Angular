@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-licplat-dashboard',
@@ -12,9 +13,10 @@ export class LicplatDashboardComponent implements OnInit {
   maxDate = new Date();
   date = new FormControl(new Date());
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
+    this.appService.setTitle('Dashboard');
   }
 
 }

@@ -1,57 +1,17 @@
 <div>
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>Licence Plate Recognition with Kafka Integration</span>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-      <span><button mat-button color="accent" (click)="sidenav.toggle()">Open Sidenav</button></span>
-      <span> {{title}} </span>
-      <span class="toolbar-spacer"></span>
-      <img src="/assets/sapconet-logo_03.png" alt="" width="150px" />
-    </mat-toolbar-row>
-  </mat-toolbar>
+  <p>
+    Control the Kafka apps and microservices with this.
+  </p>
 </div>
-
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side">
-    <ul>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../tabledisp">Go To Table Display</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../licplatinfo/1">Go To Licence Plate Info</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../infostream">Go To Live Information Stream</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../trainlicplat">Go To Licence Plate Trainer</a>
-      </li>
-      <li>
-        <a mat-raised-button color="primary" routerLink="./control">Go To Controller</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="/dashboard">Go To Dashboard</a>
-      </li>
-    </ul>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div>
-      <p>
-        Control the Kafka apps and microservices with this.
-      </p>
-    </div>
-    <div>
-      <p>App state: {{ appState }}</p>
-    </div>
-    <div>
-      <button mat-raised-button style="background-color: #4BB543; color: white;" (click)="start()">Start</button>
-      <button mat-raised-button style="background-color: #d9534f; color: white; margin-left: 1%;"
-        (click)="stop()">Stop</button>
-      <button mat-raised-button style="background-color: #4BB543; color: white; margin-left: 1%;"
-        (click)="resume()">Resume</button>
-      <button mat-raised-button style="background-color: #f0ad4e; color: white; margin-left: 1%;"
-        (click)="suspend()">Suspend</button>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div>
+  <p>App state: {{ appState }}</p>
+</div>
+<div>
+  <button mat-raised-button style="background-color: #4BB543; color: white;" (click)="start()">Start</button>
+  <button mat-raised-button style="background-color: #d9534f; color: white; margin-left: 1%;"
+    (click)="stop()">Stop</button>
+  <button mat-raised-button style="background-color: #4BB543; color: white; margin-left: 1%;"
+    (click)="resume()">Resume</button>
+  <button mat-raised-button style="background-color: #f0ad4e; color: white; margin-left: 1%;"
+    (click)="suspend()">Suspend</button>
+</div>

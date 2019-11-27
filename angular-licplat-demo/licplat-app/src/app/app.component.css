@@ -87,6 +87,8 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
+.mat-toolbar {}
+
 .mat-toolbar-row button {
   margin-right: 20px;
 }
@@ -95,8 +97,16 @@ th.mat-sort-header-sorted {
   width: 20%;
 }
 
+.mat-sidenav li {
+  margin: 10px;
+}
+
 .mat-sidenav-container {
   min-height: 500px;
+}
+
+.mat-sidenav-content {
+  padding: 10px;
 }
 
 ul {
@@ -106,5 +116,9 @@ ul {
 }
 
 .mat-toolbar-row img {
-  margin: 15px;
+  margin-bottom: 15px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
 }

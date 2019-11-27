@@ -81,14 +81,6 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
-.mat-toolbar-row button {
-  margin-right: 20px;
-}
 
-.mat-sidenav {
-  width: 20%;
-}
 
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
+

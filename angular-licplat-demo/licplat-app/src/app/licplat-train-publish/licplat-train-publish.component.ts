@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-licplat-train-publish',
@@ -7,22 +8,21 @@ import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
   styleUrls: ['./licplat-train-publish.component.css']
 })
 export class LicplatTrainPublishComponent implements OnInit {
-  title = "Licence Plate Training Page";
 
   fileData: File = null;
   previewUrl: any = null;
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
 
-  hideSubmitCancel: boolean = false;
-  hideDisabled: boolean = true;
+  hideSubmitCancel = false;
+  hideDisabled = true;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private appService: AppService) { }
 
-  ngOnInit() { }
+  ngOnInit() { this.appService.setTitle('Licence Plate Training Page'); }
 
   fileProgress(fileInput: any) {
-    this.fileData = <File>fileInput.target.files[0];
+    this.fileData =  fileInput.target.files[0] as File;
     this.preview();
   }
 
@@ -30,17 +30,17 @@ export class LicplatTrainPublishComponent implements OnInit {
     this.hideDisabled = true;
     this.hideSubmitCancel = false;
     // Show preview
-    var mimeType = this.fileData.type;
+    let mimeType = this.fileData.type;
     if (mimeType.match(/image\/*/) == null) {
       return;
     }
 
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.readAsDataURL(this.fileData);
     reader.onload = (_event) => {
       this.previewUrl = reader.result;
 
-    }
+    };
 
     this.hideDisabled = false;
     this.hideSubmitCancel = true;
@@ -65,8 +65,7 @@ export class LicplatTrainPublishComponent implements OnInit {
           console.log(events.body);
           alert('SUCCESS !!');
         }
-
-      })
+      });
   }
 
   Cancel() {

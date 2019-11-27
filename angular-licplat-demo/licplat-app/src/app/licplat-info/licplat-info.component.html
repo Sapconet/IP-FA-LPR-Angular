@@ -1,60 +1,19 @@
-<div>
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>Licence Plate Recognition with Kafka Integration</span>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-      <button mat-button color="accent" (click)="sidenav.toggle()">Open Sidenav</button>
-      <span class="example-spacer"></span>
-      <span> {{title}} </span>
-      <span class="toolbar-spacer"></span>
-      <img src="/assets/sapconet-logo_03.png" alt="" width="150px" />
-    </mat-toolbar-row>
-  </mat-toolbar>
-</div>
-
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side">
-    <ul>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../../tabledisp">Go To Table Display</a>
-      </li>
-      <li>
-        <a mat-raised-button color="primary" routerLink="../../licplatinfo">Go To Licence Plate Info</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../../infostream">Go To Live Information Stream</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../../trainlicplat">Go To Licence Plate Trainer</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../../control">Go To Controller</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../../dashboard">Go To Dashboard</a>
-      </li>
-    </ul>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div *ngIf="licplat">
-      <h2>{{licplat.prediction | uppercase}} Details</h2>
-      <button mat-button (click)="goBack()">Go Back</button>
-      <p>ID: {{licplat.id}}</p>
-      <p>Prediction: {{licplat.prediction}}</p>
-      <p>Value: {{licplat.value}}</p>
-      <!-- <p>Timestamp: {{licplat.timestamp}}</p>
+<div *ngIf="licplat">
+  <h2>{{licplat.prediction | uppercase}} Details</h2>
+  <button mat-button (click)="goBack()" color="primary">Go Back</button>
+  <p>ID: {{licplat.id}}</p>
+  <p>Prediction: {{licplat.prediction}}</p>
+  <p>Value: {{licplat.value}}</p>
+  <!-- <p>Timestamp: {{licplat.timestamp}}</p>
       <p>Location: {{licplat.location}}</p>
       <p>Camera ID: {{licplat.cameraId}}</p>
       <p>Action: {{licplat.arrival_departure}}</p>
       <p>Description: {{licplat.description}}</p> -->
-      <p>Image location: {{licplat.image}}</p>
-      <p><img src="{{licplat.image}}" alt="{{licplat.prediction}}" width="800px" /></p>
-      <div>
-        <!-- <label>name:
+  <p>Image location: {{licplat.image}}</p>
+  <p><img src="{{licplat.image}}" alt="{{licplat.prediction}}" width="800px" /></p>
+  <div>
+    <!-- <label>name:
             <input [(ngModel)]="licplat.prediction" placeholder="prediction" />
           </label> -->
-      </div>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</div>

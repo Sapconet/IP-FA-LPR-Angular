@@ -35,6 +35,36 @@ app.post("/", (req, res) => {
   });
 });
 
+app.post("/file-upload", (req, res) => {
+  console.log("File Upload API Activated!!");
+  // console.log(req.body);
+
+  const kafka_client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
+  var Producer = kafka.Producer,
+    producer = new Producer(kafka_client),
+    payloads = [
+      {
+        topic: "test",
+        messages: "Hi, Mike"
+      }
+    ];
+  producer.on("ready", function() {
+    console.log("ready");
+    producer.send(payloads, function(err, data) {
+      console.log(data);
+      producer.close();
+    });
+  });
+  producer.on("error", function(err) {
+    console.log(err);
+  });
+
+  kafka_client.on("error", function(err) {
+    console.log("client error: " + err);
+  });
+  res.send("Something must have happened");
+});
+
 app.post("/getLabelTopic", (req, res) => {
   var Consumer = kafka.Consumer;
   var consumer = new Consumer(
@@ -186,20 +216,12 @@ app.post("/suspendFramePlateGrab", (req, res) => {
   });
 });
 
-app.post("/file-upload", function() {
-  console.log("File Upload API Activated!!");
-});
-
 app.post("/errors", (req, res) => {
   console.log(req.body);
   res.send();
 });
 
-try {
-  const port = config.PORT;
-  app.listen(port, () => {
-    console.log("Server is running on port " + port);
-  });
-} catch (err) {
-  console.error(err);
-}
+const port = config.PORT;
+app.listen(port, () => {
+  console.log("Server is running on port " + port);
+});

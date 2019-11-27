@@ -1,98 +1,60 @@
 <div>
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>Licence Plate Recognition with Kafka Integration</span>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-      <button mat-button color="accent" (click)="sidenav.toggle()">Open Sidenav</button>
-      <span> {{title}} </span>
-      <span class="toolbar-spacer"></span>
-      <img src="/assets/sapconet-logo_03.png" alt="" width="150px" />
-    </mat-toolbar-row>
-  </mat-toolbar>
+  <p>
+    Using Kafka based technologies to display Licence Plate Recognition tecnologies in a tabular format.
+  </p>
+</div>
+<div>
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
+  </mat-form-field>
+
+  <div class="button-row">
+    <a mat-raised-button routerLink="../infostream" color="primary">Go to Live Data Feed</a>
+    <button mat-raised-button (click)="refreshData()" color="accent">Refresh Data</button>
+  </div>
 </div>
 
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side">
-    <ul>
-      <li>
-        <a mat-raised-button color="primary" routerLink="/tabledisp">Go To Table Display</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="/licplatinfo/1">Go To Licence Plate Info</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../infostream">Go To Live Information Stream</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../trainlicplat">Go To Licence Plate Trainer</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="../control">Go To Controller</a>
-      </li>
-      <li>
-        <a mat-raised-button color="accent" routerLink="/dashboard">Go To Dashboard</a>
-      </li>
-    </ul>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div>
-      <p>
-        Using Kafka based technologies to display Licence Plate Recognition tecnologies in a tabular format.
-      </p>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
-      </mat-form-field>
+<div>
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
 
-      <div class="button-row">
-        <a mat-raised-button routerLink="../infostream">Go to Live Data Feed</a>
-        <button mat-raised-button (click)="refreshData()">Refresh Data</button>
-      </div>
-    </div>
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column | uppercase}}
+      </th>
+      <td mat-cell *matCellDef="let licplat"> {{licplat[column]}} </td>
+    </ng-container> -->
 
-    <div>
-      <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let licplat" [attr.colspan]="columnsToDisplay.length">
+        <div class="example-element-detail" [@detailExpand]="licplat == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="licplat-img-frame">
+            <img src={{licplat.image}} alt="A plate" width="300px">
+          </div>
+          <div class="example-element-diagram">
+            <div class="example-element-position"> {{licplat.value}}</div>
+            <div class="example-element-symbol"> {{licplat.prediction}} </div>
+            <!-- <div class="example-element-name"> {{licplat.timestamp}} </div> -->
+            <!-- <div class="example-element-weight"> {{licplat.cameraId}} </div> -->
+          </div>
+          <div class="example-element-description">
+            <button mat-raised-button routerLink="/licplatinfo/{{licplat.id}}"
+              class="example-element-description-attribution" color="primary">Go To Data</button>
 
-        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column | uppercase}}
-          </th>
-          <td mat-cell *matCellDef="let licplat"> {{licplat[column]}} </td>
-        </ng-container> -->
+            <!--{{licplat.description}} - {{licplat.arrival_departure}} -->
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
 
-        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-        <ng-container matColumnDef="expandedDetail">
-          <td mat-cell *matCellDef="let licplat" [attr.colspan]="columnsToDisplay.length">
-            <div class="example-element-detail" [@detailExpand]="licplat == expandedElement ? 'expanded' : 'collapsed'">
-              <div class="licplat-img-frame">
-                <img src={{licplat.image}} alt="A plate" width="300px">
-              </div>
-              <div class="example-element-diagram">
-                <div class="example-element-position"> {{licplat.value}}</div>
-                <div class="example-element-symbol"> {{licplat.prediction}} </div>
-                <!-- <div class="example-element-name"> {{licplat.timestamp}} </div> -->
-                <!-- <div class="example-element-weight"> {{licplat.cameraId}} </div> -->
-              </div>
-              <div class="example-element-description">
-                <button mat-raised-button routerLink="/licplatinfo/{{licplat.id}}"
-                  class="example-element-description-attribution">Go To Data</button>
-
-                <!--{{licplat.description}} - {{licplat.arrival_departure}} -->
-              </div>
-            </div>
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
-
-        <tr mat-row *matRowDef="let licplat; columns: columnsToDisplay;" class="example-element-row"
-          [class.example-expanded-row]="expandedElement === licplat"
-          (click)="expandedElement = expandedElement === licplat ? null : licplat">
-        </tr>
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
-      <!-- <div *ngIf="selectedLicPlat">
+    <tr mat-row *matRowDef="let licplat; columns: columnsToDisplay;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === licplat"
+      (click)="expandedElement = expandedElement === licplat ? null : licplat">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+  <!-- <div *ngIf="selectedLicPlat">
         <h2>{{selectedLicPlat.prediction | uppercase}} Details</h2>
         <div>id: {{selectedLicPlat.id}}</div>
         <div>
@@ -101,6 +63,4 @@
           </label>
         </div>
       </div> -->
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+</div>
