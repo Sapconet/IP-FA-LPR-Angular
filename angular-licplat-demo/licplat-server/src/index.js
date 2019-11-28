@@ -51,18 +51,33 @@ app.post("/file-upload", (req, res) => {
   producer.on("ready", function() {
     console.log("ready");
     producer.send(payloads, function(err, data) {
-      console.log(data);
-      producer.close();
+      console.log("Data: " + data);
+      console.log("Error on data: " + err);
+      // producer.close();
     });
   });
+
   producer.on("error", function(err) {
-    console.log(err);
+    console.log("Error: " + err);
   });
 
   kafka_client.on("error", function(err) {
     console.log("client error: " + err);
   });
-  res.send("Something must have happened");
+
+  // var topicsToCreate = [
+  //   {
+  //     topic: "ztest1",
+  //     partitions: 1,
+  //     replicationFactor: 2
+  //   }
+  // ];
+  // kafka_client.createTopics(topicsToCreate, (error, result) => {
+  //   console.log("Result: " + result);
+  //   console.log("Error on data: " + error);
+  // });
+
+  res.send("Oh, hi Mark");
 });
 
 app.post("/getLabelTopic", (req, res) => {
