@@ -19,12 +19,14 @@ export class InfoStreamComponent implements OnInit {
   async ngOnInit() {
     this.appService.setTitle('Information Live Stream');
 
+    console.log("Getting plates ...");
     this.dataService.getLicencePlates()
       .subscribe(res => {
         this.zone.run(() => {
           this.licenceplates = res;
           if (this.licenceplates && this.licenceplates.length > 0) {
             this.totalUpdates++;
+            this.test();
           }
         });
       }

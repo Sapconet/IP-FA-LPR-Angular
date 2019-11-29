@@ -1,13 +1,13 @@
 const kafka = require("kafka-node");
 const pubsub = require("./gql/pubsub");
 const config = require("./config");
-const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
 
 const LICENCEPLATE_TOPIC = "licenceplate_topic";
 const STATE_TOPIC = "state_topic";
 
 module.exports = {
   getLabelTopic() {
+    const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
     var Consumer = kafka.Consumer;
     var consumer = new Consumer(
       client,
@@ -29,6 +29,7 @@ module.exports = {
     });
   },
   getStateTopic() {
+    const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
     var Consumer = kafka.Consumer;
     var consumer = new Consumer(client, [{ topic: "StateTopic" }]);
     consumer.on("message", message => {
@@ -37,6 +38,7 @@ module.exports = {
     });
   },
   getLastImg() {
+    const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
     var Consumer = kafka.Consumer;
     var consumer = new Consumer(
       client,
@@ -52,6 +54,7 @@ module.exports = {
   },
   startFramePlateGrab() {
     var Producer = kafka.Producer,
+      client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST }),
       producer = new Producer(client),
       payloads = [
         {
@@ -66,15 +69,17 @@ module.exports = {
       console.log("ready");
       producer.send(payloads, function(err, data) {
         console.log(data);
+        console.error(err);
         producer.close();
       });
     });
 
-    client.on("error", function(err) {
-      console.log("client error: " + err);
+    producer.on("error", function(err) {
+      console.log("producer error: " + err);
     });
   },
   stopFramePlateGrab() {
+    const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
     var Producer = kafka.Producer,
       producer = new Producer(client),
       payloads = [
@@ -99,6 +104,7 @@ module.exports = {
     });
   },
   resumeFramePlateGrab() {
+    const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
     var Producer = kafka.Producer,
       producer = new Producer(client),
       payloads = [
@@ -123,6 +129,7 @@ module.exports = {
     });
   },
   suspendFramePlateGrab() {
+    const client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
     var Producer = kafka.Producer,
       producer = new Producer(client),
       payloads = [

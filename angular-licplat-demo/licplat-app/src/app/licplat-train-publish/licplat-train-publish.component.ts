@@ -22,7 +22,7 @@ export class LicplatTrainPublishComponent implements OnInit {
   ngOnInit() { this.appService.setTitle('Licence Plate Training Page'); }
 
   fileProgress(fileInput: any) {
-    this.fileData =  fileInput.target.files[0] as File;
+    this.fileData = fileInput.target.files[0] as File;
     this.preview();
   }
 
@@ -39,7 +39,6 @@ export class LicplatTrainPublishComponent implements OnInit {
     reader.readAsDataURL(this.fileData);
     reader.onload = (_event) => {
       this.previewUrl = reader.result;
-
     };
 
     this.hideDisabled = false;
@@ -49,6 +48,7 @@ export class LicplatTrainPublishComponent implements OnInit {
   onSubmit() {
     const formData = new FormData();
     formData.append('files', this.fileData);
+    console.log(formData);
 
     this.fileUploadProgress = '0%';
 

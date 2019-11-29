@@ -120,9 +120,9 @@ export class DataManagerService {
       }
       `
     }).then(result => {
-      console.log(result.data);
+      console.log("Result " + JSON.stringify(result.data));
     }).catch(
-      err => console.log(err)
+      err => console.log("Error " + err)
     );
 
     // const HttpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };

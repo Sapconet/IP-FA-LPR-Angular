@@ -56,7 +56,7 @@ const server = createServer(app);
 
 schema.applyMiddleware({ app }, cors(corsOptions));
 
-app.listen(PORT, err => {
+server.listen(PORT, err => {
   if (err) {
     throw new Error(err);
   }

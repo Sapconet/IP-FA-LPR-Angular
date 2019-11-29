@@ -37,15 +37,15 @@ app.post("/", (req, res) => {
 
 app.post("/file-upload", (req, res) => {
   console.log("File Upload API Activated!!");
-  // console.log(req.body);
+  console.log(JSON.stringify(req.body));
 
   const kafka_client = new kafka.KafkaClient({ kafkaHost: config.KAFKA_HOST });
-  var Producer = kafka.Producer,
-    producer = new Producer(kafka_client),
+  var Producer = kafka.Producer;
+  var producer = new Producer(kafka_client),
     payloads = [
       {
         topic: "test",
-        messages: "Hi, Mike"
+        messages: "Hi There"
       }
     ];
   producer.on("ready", function() {
